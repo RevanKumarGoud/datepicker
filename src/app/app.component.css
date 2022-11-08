@@ -1,0 +1,21 @@
+input{
+    padding: 10px;
+    width: 11em;
+    text-align: left;
+    background-color: rgb(37, 210, 150);
+    border: none;
+    border-radius:20px;
+    font-size: 20px;
+    color: aqua;
+    
+}
+thead{
+    border: 2px;
+    background-color: burlywood;
+}
+tr:hover{
+background-color: cadetblue;
+}
+table{
+    border: 1px solid rgb(95, 87, 87) ;
+}
