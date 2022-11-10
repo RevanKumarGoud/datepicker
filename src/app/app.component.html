@@ -1,21 +1,29 @@
 <h1>Employee Dashboard</h1>
-  <form>
-    <input  type="date" name="date"   [(ngModel)]="Date" (ngModelChange)="search()" >
-  </form>
-<table class="table table-border">
-  <thead>
-    <tr>
-      <th (click)="sortId()">Id&nbsp;<i class="fa fa-sort"></i></th>
-      <th>EmployeeName</th>
-      <th>JoinDate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users | paginate :{itemsPerPage:5, currentPage:p} ">
-       <td>{{user.id}}</td>
-       <td>{{user.Name}}</td>
-       <td>{{user.Date}}</td>
-    </tr>
-  </tbody>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls> 
-</table>
+<div class="card bg text-white">
+  <form class="m-5">
+  <input  type="date" name="date"   [(ngModel)]="Date" (ngModelChange)="search()" >
+</form>
+<app-drop-down (searchTextChanged)="onSearchTextChanged($event)"></app-drop-down>
+  <div class="card-body">
+    <ng-container >
+      <table class="table">
+      <thead>
+        <tr>
+          <th (click)="sortId()">Id&nbsp;<i class="fa fa-sort"></i></th>
+              <th>EmployeeName</th>
+              <th>JoinDate</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let user of users  | paginate :{itemsPerPage:5, currentPage:p}">
+        <tr *ngIf="searchText === '' || user.Name.toLowerCase().includes(searchText)">
+          <th scope="row">{{user.id}}</th>
+          <td>{{user.Name}}</td>
+          <td>{{user.Date}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </ng-container>
+    <pagination-controls  (pageChange)="p = $event"></pagination-controls> 
+  </div>
+</div>
+

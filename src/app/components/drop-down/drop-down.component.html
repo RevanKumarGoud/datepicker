@@ -1,0 +1,15 @@
+<div ngbDropdown class="dropdown">
+  <button ngbDropdownToggle class="btn btn-secondary" type="button" id="dropdownMenuButton1" aria-expanded="false" >
+    TableDataSearch
+</button>
+  <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+    <li>
+     <label>ID</label>
+      <input type="text">
+    </li>
+    <li>
+      <label>Name</label>
+      <input type="text"  [(ngModel)]="enterSearchValue" (input)="onSearchTextChanged()">
+    </li>
+  </ul>
+</div>

@@ -2,20 +2,33 @@ input{
     padding: 10px;
     width: 11em;
     text-align: left;
-    background-color: rgb(37, 210, 150);
+    background-color:#ffd369;
     border: none;
     border-radius:20px;
     font-size: 20px;
-    color: aqua;
+    color: rgb(14, 17, 17);
     
 }
-thead{
-    border: 2px;
-    background-color: burlywood;
+.card{
+   padding: 30px;
+   padding-left:30px;
+   width: 80%;
 }
-tr:hover{
-background-color: cadetblue;
+.bg{
+    background-color: #393e46;
+}
+.card-body {
+    background-color: #222831;
 }
 table{
-    border: 1px solid rgb(95, 87, 87) ;
+    color: #eeeeee;
 }
+tr:hover{
+background-color: #805555;
+}
+h1{
+    color: #eeeeee;
+    text-align: center;
+    padding: 20px;
+}
+

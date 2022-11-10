@@ -1,0 +1,14 @@
+.dropdown{
+    margin-left: 60rem;
+    margin-top: -9rem;
+}
+ul{
+    background-color: transparent;
+    color: white;
+}
+input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid red;
+    color: white;
+}

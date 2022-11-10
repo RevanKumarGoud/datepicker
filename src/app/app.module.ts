@@ -11,11 +11,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import  { DatePipe } from "@angular/common";
 import  {FilterDatePipe} from './filter-date.pipe';
 import { Ng2OrderModule } from 'ng2-order-pipe';
-
+import { DropDownComponent } from './components/drop-down/drop-down.component';
 @NgModule({
   declarations: [
     AppComponent,
-    FilterDatePipe
+    FilterDatePipe,
+    DropDownComponent
   ],
   imports: [
     BrowserModule,
