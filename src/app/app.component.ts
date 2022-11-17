@@ -2,7 +2,7 @@ import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { users } from './User';
 import { RestService } from './rest.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { formatDate } from '@angular/common';
+import {  DatePipe, formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +13,12 @@ export class AppComponent {
   title = 'datepicker';
   //pagination
   p: number = 1;
+  selectedHeader:any;
 
-  Date: any;
+
   //Datao bject
-  users: users[] = [
+  public userheader = [{name:'id'}, {name:'Name'}, {name:'Date'} ]
+   users: users[] = [
     {
       id: 0,
       Name: '',
@@ -24,24 +26,43 @@ export class AppComponent {
     },
   ];
   order: any;
+  isDesc: boolean = false;
 
   constructor(
     public service: RestService,
     private formBulider: FormBuilder,
-    @Inject(LOCALE_ID) public local: string
-  ) {}
+    @Inject(LOCALE_ID) public local: string,
+    private datePipe: DatePipe
+  ) {
+  }
+ 
+   usersData:any;
   ngOnInit(): void {
     this.service.getUsers().subscribe((Data) => {
       this.users = Data;
+      this.usersData =[...Data]
     });
   }
   //input searching
-  search() {
-    if (this.Date == '') {
-      this.ngOnInit();
-    } else {
-      let date = formatDate(this.Date, 'dd-MM-yyyy', this.local);
-      this.users = this.users.filter((Data) => Data.Date === date);
+  search(e:any) {
+    if(this.selectedHeader == 'Name'){
+      this.users = this.usersData.filter((Data:any) => Data.Name.toLowerCase() === e.target.value);
+      return e.target.value
+    }
+  }
+  SearchID(e:any){
+    if(this.selectedHeader == 'id'){
+      this. users = this.usersData.filter((search:any) => search.id == e.target.value)
+    }
+  }
+  
+  searchDate(e:any){
+    if(this.selectedHeader === 'Date'){
+      
+      let date = formatDate(e.target.value, 'dd-MM-yyyy', this.local);
+
+      this.users = this.usersData.filter((item:any) => item.Date === date );
+      console.log(date)
     }
   }
 
@@ -56,9 +77,24 @@ export class AppComponent {
     this.order = !this.order;
   }
 
-searchText:string = '';
+key : string = 'Name';
+reverse : boolean = false;
+sort(key:any) {
+  this.key = key;
+  this.reverse = !this.reverse
+}
+  
+  
+  changeMethode(e:any){
+      this.selectedHeader = e.target.value;
+      console.log(e.target.value)
+    
+   }
+   
+  
 
-onSearchTextChanged(searchvalue: string){
-this.searchText = searchvalue;
+
 }
-}
+
+
+
