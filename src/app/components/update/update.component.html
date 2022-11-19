@@ -1,0 +1,17 @@
+<div class="container-fluid">
+<div class="card">
+    <div class="card-body">
+        <div class="form-group">
+            <label for="">Name</label>
+            <input type="text" class="form-control" [(ngModel)]="Users.Name">
+            </div>
+            <div class="form-group">
+            <label for="">Date</label>
+            <input type="Date" class="form-control" [(ngModel)]="Users.Date">
+            </div>
+            <div class="form-group">
+            <button type="submit" class="btn btn-info" (click)="update()">Save</button>
+            </div>
+    </div>
+</div>
+</div>

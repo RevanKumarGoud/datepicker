@@ -1,14 +1,25 @@
-.dropdown{
-    margin-left: 60rem;
-    margin-top: -9rem;
+.card{
+    width: 80%;
+    justify-content: center;
+    text-align: center;
+    margin: 10rem;
 }
-ul{
-    background-color: transparent;
-    color: white;
+pagination-controls{
+color: #423c3c;
+}
+select{
+width: 7rem;
+padding: 4px;
+border-radius: 30px;
+background-color:transparent;
+
+}
+option{
+    background-color:transparent;
+    color: #423c3c;
 }
 input{
-    background-color: transparent;
     border: none;
-    border-bottom: 1px solid red;
-    color: white;
+    border-bottom: 2px solid;
+    background-color: ivory;
 }

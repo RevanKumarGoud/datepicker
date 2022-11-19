@@ -13,12 +13,14 @@ import  {FilterDatePipe} from './filter-date.pipe';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { UpdateComponent } from './components/update/update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FilterDatePipe,
-    DropDownComponent
+    DropDownComponent,
+    UpdateComponent
   ],
   imports: [
     BrowserModule,

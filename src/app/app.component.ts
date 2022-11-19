@@ -3,6 +3,7 @@ import { users } from './User';
 import { RestService } from './rest.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {  DatePipe, formatDate } from '@angular/common';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,13 @@ import {  DatePipe, formatDate } from '@angular/common';
 })
 export class AppComponent {
   title = 'datepicker';
-  //pagination
+
   p: number = 1;
   selectedHeader:any;
-
+  displayNotification = false;
+  usersData:any;
+  isDesc: boolean = true;
+  order: any;
 
   //Datao bject
   public userheader = [{name:'id'}, {name:'Name'}, {name:'Date'} ]
@@ -25,18 +29,15 @@ export class AppComponent {
       Date: '',
     },
   ];
-  order: any;
-  isDesc: boolean = false;
 
   constructor(
     public service: RestService,
     private formBulider: FormBuilder,
     @Inject(LOCALE_ID) public local: string,
-    private datePipe: DatePipe
-  ) {
-  }
+  private router : Router
+  ) {}
  
-   usersData:any;
+
   ngOnInit(): void {
     this.service.getUsers().subscribe((Data) => {
       this.users = Data;
@@ -45,26 +46,21 @@ export class AppComponent {
   }
   //input searching
   search(e:any) {
-    if(this.selectedHeader == 'Name'){
+    this.displayNotification = false;
+    if(this.selectedHeader === 'id') {
+      this.users = this.usersData.filter((search:any) => search.id == e.target.value)
+    }
+     else if (this.selectedHeader == 'Name'){
       this.users = this.usersData.filter((Data:any) => Data.Name.toLowerCase() === e.target.value);
-      return e.target.value
     }
-  }
-  SearchID(e:any){
-    if(this.selectedHeader == 'id'){
-      this. users = this.usersData.filter((search:any) => search.id == e.target.value)
-    }
-  }
-  
-  searchDate(e:any){
-    if(this.selectedHeader === 'Date'){
-      
+    else if (this.selectedHeader === 'Date') {
       let date = formatDate(e.target.value, 'dd-MM-yyyy', this.local);
-
       this.users = this.usersData.filter((item:any) => item.Date === date );
-      console.log(date)
     }
-  }
+    if(this.users.length === 0){
+      this.displayNotification = true
+    }
+  } 
 
   sortId() {
     if (this.order) {
@@ -77,7 +73,7 @@ export class AppComponent {
     this.order = !this.order;
   }
 
-key : string = 'Name';
+key : string = 'id';
 reverse : boolean = false;
 sort(key:any) {
   this.key = key;
@@ -91,8 +87,19 @@ sort(key:any) {
     
    }
    
-  
-
+   deleteRow(val: any){
+     if(confirm("Are you sure to delete")){
+     this.service.deleteUser(val).subscribe(data => {
+       });
+       this.service.getUsers().subscribe((Response) => {
+        this.users = Response;
+       })
+   }
+  }
+  update(id:any) {
+    this.router.navigate(['update',id])
+  }
+     
 
 }
 

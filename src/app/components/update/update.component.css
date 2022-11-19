@@ -1,0 +1,10 @@
+.container-fluid{
+    margin-left: 300px;
+    margin-top: 20px;
+    padding-bottom: 13px;
+    padding-top: 13px;
+   width: 40%;
+}
+.card{
+    width: 200%;
+}
