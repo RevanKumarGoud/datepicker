@@ -2,10 +2,10 @@ import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { users } from 'src/app/User';
 import { RestService } from 'src/app/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { observable } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { formatDate } from '@angular/common';
+import { UserFetch } from './userFetch';
 @Component({
   selector: 'app-drop-down',
   templateUrl: './drop-down.component.html',
@@ -18,17 +18,11 @@ export class DropDownComponent implements OnInit {
   usersData:any;
   isDesc: boolean = true;
   order: any;
-
   //Datao bject
   public userheader = [{name:'id'}, {name:'Name'}, {name:'Date'} ]
-   users: users[] = [
-    {
-      id: 0,
-      Name: '',
-      Date: '',
-    },
-  ];
+   users: users[] = [];
 
+  Users!: UserFetch;
   constructor(
     public service: RestService,
     private formBulider: FormBuilder,
@@ -36,12 +30,13 @@ export class DropDownComponent implements OnInit {
   private router : Router
   ) {}
  
-
+formvalue!:FormGroup
   ngOnInit(): void {
     this.service.getUsers().subscribe((Data) => {
       this.users = Data;
-      this.usersData =[...Data]
+      this.usersData =[...Data];
     });
+    this.add()
   }
   //input searching
   search(e:any) {
@@ -98,7 +93,19 @@ sort(key:any) {
   update(id:any) {
     this.router.navigate(['update',id])
   }
+ 
+  add(){
+    this.service.AddUsers(this.Users).subscribe(data => {
+      this.Users! = data
+      this.getUsers()
+      console.log(this.Users);
+    });
+  }
+  getUsers() {
+    this.service.getUsers().subscribe((data) => {
+      this.users = data;
 
-  
-  
+    })
+  }
+
 }

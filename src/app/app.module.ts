@@ -15,12 +15,13 @@ import { DropDownComponent } from './components/drop-down/drop-down.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { UpdateComponent } from './components/update/update.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     FilterDatePipe,
     DropDownComponent,
-    UpdateComponent
+    UpdateComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,7 @@ import { UpdateComponent } from './components/update/update.component';
     ReactiveFormsModule,
     DatePipe,
     Ng2OrderModule,
-    NgSelectModule
+    NgSelectModule,
       
   
   ],

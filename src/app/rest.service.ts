@@ -33,5 +33,11 @@ httpOptions = {
     map(() => users)
    )
  }
+ AddUsers(users:UserFetch):Observable<users> {
+  console.log(this.url);
+  const url = `${this.url}`;
+   return this.http.post<users>(url,users,this.httpOptions);
+ }
+
 
 }
